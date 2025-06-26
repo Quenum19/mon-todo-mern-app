@@ -17,7 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
   origin: [
     'http://localhost:5173', // développement local
-    'https://mon-todo-mern-app.vercel.app' // votre domaine Vercel
+    'https://todo-mern-app-proj-final.vercel.app', // votre domaine Vercel
+    'https://mon-todo-mern-app-client.onrender.com' // votre domaine Render
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
