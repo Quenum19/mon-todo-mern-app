@@ -14,7 +14,7 @@ library.add(faCheckCircle, faTrash, faEdit, faPlusCircle, faTimesCircle, faSignI
 // ^ Ajoute les icônes que tu prévois d'utiliser
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  // </React.StrictMode>,
 );
