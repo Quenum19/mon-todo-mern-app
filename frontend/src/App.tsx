@@ -10,18 +10,29 @@ import Dashboard from './pages/Dashboard';
 import Navbar from './components/Navbar';
 
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  // Dépend directement du localStorage pour la vérification immédiate
-  const user = localStorage.getItem('user');
-  const isAuthenticated = !!user;
+  const [isAuthenticated, setIsAuthenticated] = React.useState(!!localStorage.getItem('user'));
+
+  React.useEffect(() => {
+    const handleLogin = () => {
+      setIsAuthenticated(!!localStorage.getItem('user'));
+    };
+
+    window.addEventListener('userLoggedIn', handleLogin);
+    window.addEventListener('storage', handleLogin);
+
+    return () => {
+      window.removeEventListener('userLoggedIn', handleLogin);
+      window.removeEventListener('storage', handleLogin);
+    };
+  }, []);
 
   if (!isAuthenticated) {
-    // Redirige immédiatement si non authentifié
     return <Navigate to="/login" replace />;
   }
 
-  // Si authentifié, rend les enfants
   return children;
 };
+
 
 function App() {
   return (

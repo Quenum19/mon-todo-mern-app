@@ -21,14 +21,22 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post(`${API_URL}/users/login`, { email, password });
+
+      // ✅ On sauvegarde la réponse dans localStorage
       localStorage.setItem('user', JSON.stringify(response.data));
-      navigate('/dashboard');
+
+      // ✅ On déclenche un event personnalisé pour notifier les autres composants
+      window.dispatchEvent(new Event('userLoggedIn'));
+
+      // ✅ Puis on navigue vers le dashboard
+      navigate('/dashboard', { replace: true });
     } catch (err: any) {
       setError(err.response?.data?.message || 'Identifiants invalides.');
     } finally {
       setLoading(false);
     }
   };
+
   
   
 
